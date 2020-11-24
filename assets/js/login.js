@@ -17,6 +17,7 @@ $(function () {
 
   // 从layui中获取gorm表单的功能
   let form = layui.form;
+  let layer = layui.layer;
   // 表单效验
   form.verify({
     //我们既支持上述函数式的方式，也支持下述数组的形式
@@ -73,24 +74,24 @@ $(function () {
     e.preventDefault();
 
     let data = $(this).serialize();
+    console.log(data);
 
     $.ajax({
       type: "POST",
       url: "/api/login",
       data,
-      succsee: function (res) {
+      success: function (res) {
         console.log(res);
 
         if (res.status !== 0) {
           return layer.msg("登陆失败！");
         }
 
-        layer.msg("登陆成功，即将去后台主页了")
         localStorage.setItem("token", res.token);
         layer.msg(
           "登录成功，即将去后台主页",
           {
-            time: 2000, //2秒关闭（如果不配置，默认是3秒）
+            time: 2000,
           },
           function () {
             // 关闭后做的事情 ==> 跳转页面
