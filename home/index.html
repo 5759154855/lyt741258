@@ -5,6 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>layout 后台大布局 - Layui</title>
+  <script>
+    let token = localStorage.getItem("token");
+    if (!token) {
+      location.href = "login.html";
+    }
+  </script>
   <link rel="stylesheet" href="/assets/lib/layui/css/layui.css">
   <link rel="stylesheet" href="/assets/fonts/iconfont.css">
   <link rel="stylesheet" href="/assets/css/index.css">
@@ -19,8 +25,8 @@
       <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
           <a href="javascript:;">
-            <span class="text-avatar">A</span>
             <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+            <span class="text-avatar">A</span>
             个人中心
           </a>
           <dl class="layui-nav-child">
@@ -38,12 +44,13 @@
       <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <div class="userInfo">
-          <span class="text-avatar">A</span>
           <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-          <span class="welcome">欢迎 XXX</span>
+          <span class="text-avatar">A</span>
+          <span id="welcome">欢迎 XXX</span>
         </div>
         <ul class="layui-nav layui-nav-tree" lay-filter="test" lay-shrink="all">
-          <li class="layui-nav-item layui-this"><a href=""><span class="iconfont icon-home"></span>首页</a></li>
+          <li class="layui-nav-item layui-this"><a href="/home/index.html"><span
+                class="iconfont icon-home"></span>首页</a></li>
           <li class="layui-nav-item">
             <a href="javascript:;"><span class="iconfont icon-16"></span>文章管理</a>
             <dl class="layui-nav-child">
@@ -55,9 +62,12 @@
           <li class="layui-nav-item">
             <a href="javascript:;"><span class="iconfont icon-user"></span>个人中心</a>
             <dl class="layui-nav-child">
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i>基础资料</a></dd>
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i>更换头像</a></dd>
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i>重置密码</a></dd>
+              <dd><a href="/home/user/user_info.html" target="layBody"><i class="layui-icon layui-icon-app"></i>基础资料</a>
+              </dd>
+              <dd><a href="/home/user/user_avatar.html" target="layBody"><i
+                    class="layui-icon layui-icon-app"></i>更换头像</a></dd>
+              <dd><a href="/home/user/user_pwd.html" target="layBody"><i class="layui-icon layui-icon-app"></i>重置密码</a>
+              </dd>
             </dl>
           </li>
         </ul>
@@ -66,7 +76,8 @@
 
     <div class="layui-body">
       <!-- 内容主体区域 -->
-      <iframe src="/home/dashboard.html" name="fn"></iframe>
+      <!-- <iframe src="/home/dashboard.html" name="layBody"></iframe> -->
+      <iframe src="/home/user/user_avatar.html" name="layBody"></iframe>
     </div>
 
     <div class="layui-footer">
